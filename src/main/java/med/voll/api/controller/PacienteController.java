@@ -1,6 +1,8 @@
 package med.voll.api.controller;
 
 import jakarta.validation.Valid;
+import med.voll.api.model.medico.DadosAtualizacaoMedico;
+import med.voll.api.model.paciente.DadosAtualizacaoPaciente;
 import med.voll.api.model.paciente.DadosCadastroPaciente;
 import med.voll.api.model.paciente.DadosListagemPaciente;
 import med.voll.api.service.PacienteService;
@@ -27,5 +29,16 @@ public class PacienteController {
     @GetMapping
     public ResponseEntity<Page<DadosListagemPaciente>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginaco) {
         return ResponseEntity.status(HttpStatus.OK).body(pacienteService.listar(paginaco));
+    }
+
+    @PutMapping(value = "/{id}")
+    public void atualizar(@RequestBody DadosAtualizacaoPaciente dadosAtualizacaoPaciente, @PathVariable Long id) {
+        pacienteService.atualizar(dadosAtualizacaoPaciente, id);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        pacienteService.deletarById(id);
+        return ResponseEntity.noContent().build();
     }
 }

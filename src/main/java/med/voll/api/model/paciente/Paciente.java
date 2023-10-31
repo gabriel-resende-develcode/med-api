@@ -37,4 +37,13 @@ public class Paciente {
         cpf = dadosCadastroPaciente.cpf();
         endereco = new Endereco(dadosCadastroPaciente.endereco());
     }
+
+    public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
+        if (dados.telefone() != null) {
+            setTelefone(dados.telefone());
+        }
+        if (dados.endereco() != null) {
+            this.endereco.atualizarInformacoes(dados.endereco());
+        }
+    }
 }
