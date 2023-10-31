@@ -1,5 +1,6 @@
 package med.voll.api.service;
 
+import med.voll.api.model.medico.DadosAtualizacaoMedico;
 import med.voll.api.model.medico.DadosCadastroMedico;
 import med.voll.api.model.medico.DadosListagemMedico;
 import med.voll.api.model.medico.Medico;
@@ -10,13 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 public class MedicoService {
 
     @Autowired
     private MedicoRepository medicoRepository;
+
 
     @Transactional
     public void cadastrar(DadosCadastroMedico dadosCadastroMedico) {
@@ -24,6 +24,18 @@ public class MedicoService {
     }
 
     public Page<DadosListagemMedico> listar(Pageable paginacao) {
-        return medicoRepository.findAll(paginacao).map(DadosListagemMedico::new);
+        return medicoRepository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
+    }
+
+    @Transactional
+    public void atualizar(DadosAtualizacaoMedico dadosAtualizacaoMedico, Long id) {
+        var medico = medicoRepository.getReferenceById(id);
+        medico.atualizarInformacoes(dadosAtualizacaoMedico);
+    }
+
+    @Transactional
+    public void deletar(Long id) {
+        var medico = medicoRepository.getReferenceById(id);
+        medico.desativarMedico();
     }
 }
