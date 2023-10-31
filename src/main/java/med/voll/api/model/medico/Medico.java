@@ -2,8 +2,10 @@ package med.voll.api.model.medico;
 
 import jakarta.persistence.*;
 import lombok.*;
+import med.voll.api.dto.medico.DadosAtualizacaoMedico;
+import med.voll.api.dto.medico.DadosCadastroMedico;
 import med.voll.api.model.endereco.Endereco;
-import org.springframework.beans.BeanUtils;
+import med.voll.api.model.medico.enums.EspecialidadeMedico;
 
 @Entity
 @Table(name = "medicos")
