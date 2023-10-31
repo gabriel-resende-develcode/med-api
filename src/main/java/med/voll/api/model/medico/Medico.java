@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import med.voll.api.dto.medico.DadosAtualizacaoMedico;
 import med.voll.api.dto.medico.DadosCadastroMedico;
+import med.voll.api.dto.medico.MedicoResponseDTO;
 import med.voll.api.model.endereco.Endereco;
 import med.voll.api.model.medico.enums.EspecialidadeMedico;
+import org.springframework.beans.BeanUtils;
 
 @Entity
 @Table(name = "medicos")
@@ -44,6 +46,10 @@ public class Medico {
         crm = dadosMedico.crm();
         especialidade = dadosMedico.especialidade();
         endereco = new Endereco(dadosMedico.endereco());
+    }
+
+    public Medico(MedicoResponseDTO dto) {
+        BeanUtils.copyProperties(dto, this);
     }
 
     public void desativarMedico() {

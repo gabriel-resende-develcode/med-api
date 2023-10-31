@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import med.voll.api.dto.paciente.DadosAtualizacaoPaciente;
 import med.voll.api.dto.paciente.DadosCadastroPaciente;
+import med.voll.api.dto.paciente.PacienteResponseDTO;
 import med.voll.api.model.endereco.Endereco;
+import org.springframework.beans.BeanUtils;
 
 @Entity
 @Table(name = "pacientes")
@@ -38,6 +40,10 @@ public class Paciente {
         telefone = dadosCadastroPaciente.telefone();
         cpf = dadosCadastroPaciente.cpf();
         endereco = new Endereco(dadosCadastroPaciente.endereco());
+    }
+
+    public Paciente(PacienteResponseDTO dto) {
+        BeanUtils.copyProperties(dto, this);
     }
 
     public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
