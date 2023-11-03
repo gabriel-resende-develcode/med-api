@@ -1,4 +1,4 @@
-package med.voll.api.repository;
+package med.voll.api.repository.security;
 
 import med.voll.api.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

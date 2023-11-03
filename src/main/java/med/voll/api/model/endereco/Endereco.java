@@ -33,6 +33,7 @@ public class Endereco {
     public void atualizarInformacoes(DadosEndereco dadosEndereco) {
         if (dadosEndereco.logradouro() != null) {
             this.logradouro = dadosEndereco.logradouro();
+            logradouro = dadosEndereco.logradouro() != null ?  dadosEndereco.logradouro() : logradouro;
         }
         if (dadosEndereco.bairro() != null) {
             this.bairro = dadosEndereco.bairro();
